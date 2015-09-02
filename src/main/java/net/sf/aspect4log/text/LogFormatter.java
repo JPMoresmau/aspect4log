@@ -299,11 +299,11 @@ public class LogFormatter {
 		try {
 			toString(stringBuilder, PropertyUtils.getProperty(bean, property));
 		} catch (IllegalAccessException e) {
-			addExceptionOnToStringEvaluation(stringBuilder, e.getCause().toString());
+			addExceptionOnToStringEvaluation(stringBuilder, e.toString());
 		} catch (InvocationTargetException e) {
-			addExceptionOnToStringEvaluation(stringBuilder, e.getCause().toString());
+			addExceptionOnToStringEvaluation(stringBuilder, e.toString());
 		} catch (NoSuchMethodException e) {
-			addExceptionOnToStringEvaluation(stringBuilder, e.getCause().toString());
+			addExceptionOnToStringEvaluation(stringBuilder, e.toString());
 		} catch(Exception e){
 			addExceptionOnToStringEvaluation(stringBuilder, "#Warning!!! Template caused:  " + e + " #");
 		}
