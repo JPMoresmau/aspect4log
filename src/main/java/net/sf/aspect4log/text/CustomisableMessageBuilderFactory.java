@@ -23,7 +23,7 @@ import net.sf.aspect4log.conf.LogFormatConfiguration;
 /**
  *
  * This class is responsible for creating {@link MessageBuilder} instances.
- * Log decoration properties are set by {@link LogFormatConfiguration via reflection.
+ * Log decoration properties are set by {@link LogFormatConfiguration} via reflection.
  * 
  * @author yilativs
  *

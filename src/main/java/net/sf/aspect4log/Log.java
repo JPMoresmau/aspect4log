@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * 
  * Annotation placed on constructor/method overrides all values of annotation placed on class.
  * 
- * @author Vitaliy S <a href="mailto:vitaliy.se@gmail.com">
+ * @author Vitaliy S <a href="mailto:vitaliy.se@gmail.com"></a>
  * 
  */
 @Retention(RetentionPolicy.RUNTIME)

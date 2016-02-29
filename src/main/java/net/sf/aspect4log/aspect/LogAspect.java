@@ -35,7 +35,7 @@ import org.slf4j.MDC;
  * 
  * An aspect to handle the logging rules defined via {@link Log}.
  * 
- * @author Vitaliy S <a href="mailto:vitaliy.se@gmail.com">
+ * @author Vitaliy S <a href="mailto:vitaliy.se@gmail.com"></a>
  * 
  */
 @Aspect
@@ -58,7 +58,6 @@ public class LogAspect {
 	public static LogFormatConfiguration getLogFormatConfiguration() {
 		return logFormatConfiguration;
 	}
-
 
 	/*
 	 * it is marked static, because if there is more than one instance of LogApsect we must have one ident system per thread
@@ -192,7 +191,7 @@ public class LogAspect {
 			}
 			break;
 		default:
-			//NONE level do not print any log
+			// NONE level do not print any log
 		}
 	}
 
