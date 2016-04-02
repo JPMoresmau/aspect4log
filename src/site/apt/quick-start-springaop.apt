@@ -10,13 +10,13 @@ Quick Start with SpringAOP
 
 	*It works only with Spring managed beans, i.e you can use @Log annotation only on spring-managed beans.
 	 
-	*You can not use @Log annotation constructors and methods other than public. 
+	*You can not use @Log annotation on constructors and methods other than public. 
 	
-	*Logging of method calls in same Spring managed bean will not work unless you call that method via self reference stored in that bean.
+	*Logging of own method calls within a  Spring managed bean will not work unless you call those methods via self reference stored in the bean.
 
 	[]
 	
-	The benefit of SpringAOP is that it unlike AspectJ works with javac compiler.
+	The benefit of SpringAOP is that it unlike AspectJ works with javac compiler, i.e. you don't need to use aspectj maven plugin to compile your application.
 
 *Maven configuration:
 

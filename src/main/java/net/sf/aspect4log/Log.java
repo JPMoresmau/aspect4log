@@ -55,7 +55,7 @@ public @interface Log {
 		/**
 		 * A group of exceptions.
 		 * 
-		 * @return
+		 * @return list of Throwable to be handled with a given {@link Level}
 		 */
 		Class<? extends Throwable>[] exceptions() default { Exception.class };
 

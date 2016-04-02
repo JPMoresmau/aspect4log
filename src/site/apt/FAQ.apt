@@ -13,13 +13,10 @@ Question: Why do I see square symbols instead of arrow symbols?
  
 Which classes are good candidates to place @Log annotation on to?
 	
-	Your spring beans or ejb session beans are the best candidates.
+	Your Spring Repository Beans, SpringMVC controllers, EJB Session Beans are the best candidates.
 
 
 Which AOP framework do you prefer for aspect4log integration?
 
 	We strongly recommend to use AspectJ because it allows you to do much more with less effort,
-however in case you work with sum outdated applicaton server like IBM WebSphere, that uses very old
-libs of aspectjrt, you might consider to use SpringAOP instead.  
-
-  
+if you are afraid using AspectJ compiler, you can stay with SpringAOP.

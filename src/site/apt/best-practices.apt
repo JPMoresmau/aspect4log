@@ -1,0 +1,50 @@
+Best Practices
+
+    In a high load multiuser application it is always a challenge  between logging enough and logging too much.
+    
+    This article summarizes best practices which will let you have enough of log information and minimize affect on performance, disk usage and (surprise?) security. 
+        
+*Reasons to log
+    	There are many reasons why we want to log what application is doing.
+    	The first and the most obvious one is that we want to know what was going on at a given date and time. This may be needed for a security audit, performance audit, statistics governing, and also it can provide a lot of information for the third line of support. 
+    	The second reason is to analyzing application errors, some even use logs to notify their watch dog about problems but we consider this a bad practice (who will notify the watch dog if you application is crashed?).
+    	Third reason is tracing. We might need it when we want to run some tests on a legacy application trying to figure out how it works.
+    
+*What information to log
+        Events and operations that those these events trigger, usually these will be methods of controllers, DAO and repositories classes, and session beans. 
+    	Always log a name of a thread, this will allow you to distinct one thread from the other when you will analyze the log.
+    	If it is a multiuser service, always add login ID or login of a user, as well as jSessionId via {{{http://logback.qos.ch/manual/mdc.html}MDC}} to your log, and always add thread name to log pattern. 
+    	Adding this data to your log will let you extract user and thread activity during log parsing with grep command line utility.
+    
+*How to log without significant drawback to perfomance
+    	On a high load service the only option is to log asynchronously (Synchronous operation will cause a lot of blocking and drag performance down).
+    	Make sure your log on a device other than your local cache store or database (sounds simple but so many step into this trap over and over again).
+    	There are various plays where to store log, such as rsyslog. It is not recommended  to send any debug and tracing information to rsyslog and alike.
+    	For debug and tracing information usually file is your best friend.  Make sure you setup log rotation and compression of rotated files. 
+    	On a high load service you will often use an hour as a log rotation interval yet on less busy systems a day log rotation is usually enough.
+    	A high load  service will generates gigabytes of logs in a gz format within a day (welcome to a real high load world) despite disk space is cheap these days
+    	there are situations when you have to store the data for several years (e.g banking software has to do it for security reasons).
+    	In this case consider storing your logs to {{{https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html}HDFS}} or similar distributed file system.      
+    
+*What do not include to log 
+       All user data except id and sessionId (i.e credentials, names, phones, emails, plastic card information, PASSWORDS(there are still too many systems in the world that log passwords).
+       This information we exclude for privacy and security reasons. 
+       Non informative data. E.g. objects without meaningful toString implementation.
+       Large arrays and collections, large strings, byte arrays, streams, xml and json requests.
+       Optional candidates are duplicated messages. 
+       Sometimes on a high load service you do not want to log same error messages twice, however often it is better to see how often an error happens.
+       
+       To disable duplicated messages   for details see  {{{http://logback.qos.ch/manual/configuration.html#cumulative}}}
+       
+       
+*How to search through log
+ 	   find, {{{http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_02.html}grep}}, zgrep and less  command line utilities are your best friend.
+ 	   When you analyze the problem first you find files which contain the problem (most of the time they will be already gzipped).
+ 	   Let's say you were told a user with an id XYZ reported the problem on a date 2016-11-15
+ 	   Execute:
+ 	   find /path/to/your/service/logs -name "*2016-11-15*.gz" | xargs zgrep 'id=XYZ' | less
+ 	   and there with a help of Aspect4log you read what has happen like a good book.
+ 	   
+ 	   
+    
+	
