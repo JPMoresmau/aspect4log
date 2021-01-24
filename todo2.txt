@@ -1,11 +1,15 @@
-get read of common-lang
-consider how to get rid from common-beans
+upgrade aspectj
+introduce tests with mockito2+powermock
+add pit tests
+get rid of common-lang
+consider to get rid from common-beans
 add best practice to documentation
 usage and about must be a single page?
 update examples to 1.0.8
 introduce an example with load time weaving, this will require excuting java -javaagent:path/to/aspectjweaver.jar my application, which sucks.
 add allow to override logger
 add multiple loggers support
+add lists of classes that should never be placed into logs (e.g. byte[])
 
 consider allowing setup class wide defaults
 .e.g if 
