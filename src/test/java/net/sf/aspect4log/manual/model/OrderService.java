@@ -1,4 +1,4 @@
-package net.sf.aspect4log.manual;
+package net.sf.aspect4log.manual.model;
 
 import java.math.BigDecimal;
 import java.util.List;

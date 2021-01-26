@@ -10,7 +10,6 @@ public class ConfigurationUtilsTest {
 
 	@Test
 	public void readConfiguration() {
-
 		LogFormatConfiguration logFormatConfiguration = LogFormatConfigurationUtils.readConfiguration();
 		
 		Assert.assertEquals(CustomisableMessageBuilderFactory.class, logFormatConfiguration.getMessageBuilderFactory().getClass());

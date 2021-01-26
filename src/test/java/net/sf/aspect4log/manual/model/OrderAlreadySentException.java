@@ -1,4 +1,4 @@
-package net.sf.aspect4log.manual;
+package net.sf.aspect4log.manual.model;
 
 public class OrderAlreadySentException extends Exception {
 

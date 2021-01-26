@@ -1,10 +1,10 @@
-package net.sf.aspect4log.manual;
+package net.sf.aspect4log.manual.model;
 
-public class SecurityException extends Exception{
+public class BusinessException extends Exception{
 
 	private static final long serialVersionUID = 1L;
-
-	public SecurityException(String message) {
+	
+	public BusinessException(String message) {
 		super(message);
 	}
 
@@ -12,8 +12,5 @@ public class SecurityException extends Exception{
 	public String toString() {
 		return "SecurityException [" + getMessage() + "]";
 	}
-	
-	
-	
 
 }

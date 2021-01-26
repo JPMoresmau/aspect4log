@@ -1,4 +1,4 @@
-package net.sf.aspect4log.manual;
+package net.sf.aspect4log.manual.model;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -12,7 +12,6 @@ public class Order {
 
 	public Order(Customer customer, String address, Item[] items) {
 		this.customer = customer;
-		// TODO Auto-generated constructor stub
 		this.address = address;
 		this.items = items;
 	}
