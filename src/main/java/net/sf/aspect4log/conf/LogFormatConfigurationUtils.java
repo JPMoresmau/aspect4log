@@ -18,12 +18,11 @@ package net.sf.aspect4log.conf;
 
 import java.net.URL;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * This class is responsible for reading aspect4log configuration.
- *  
  * It tries to load configuration from aspect4log-test.xml,
  * if it does not exit it tries to read configuration from aspect4log.xml, 
  * if it does not exit it loads default configuration.

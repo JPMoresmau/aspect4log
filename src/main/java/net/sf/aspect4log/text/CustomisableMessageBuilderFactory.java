@@ -43,13 +43,13 @@ public class CustomisableMessageBuilderFactory implements MessageBuilderFactory 
 
 	/**
 	 * 
-	 * @return specifies if indent should be used for methods called inside marked method. The default value is true.
+	 * Specifies if indent should be used for methods called inside marked method. The default value is true.
 	 */
 
 	private boolean useIndent = true;
 
 	/**
-	 * @return a java.lang.String that represents text of Indent. The default value is 1 tab symbol.
+	 * Represents text of Indent. The default value is 1 tab symbol.
 	 */
 
 	private String indentText = "\t";
@@ -147,7 +147,7 @@ public class CustomisableMessageBuilderFactory implements MessageBuilderFactory 
 		private final Log log;
 		private final Object[] args;
 
-		protected SimpleMdcMessageBuilder(Log log, Object[] args) {
+		private SimpleMdcMessageBuilder(Log log, Object[] args) {
 			this.log = log;
 			this.args = (Object[])args.clone();
 		}
@@ -267,7 +267,7 @@ public class CustomisableMessageBuilderFactory implements MessageBuilderFactory 
 		}
 
 		protected void buildIndent(StringBuilder stringBuilder) {
-			for (int i = 0; i < LogAspect.getThreadLocalIdent().intValue(); i++) {
+			for (int i = 0; i < LogAspect.getThreadLocalIdent(); i++) {
 				stringBuilder.append(indentText);
 			}
 		}

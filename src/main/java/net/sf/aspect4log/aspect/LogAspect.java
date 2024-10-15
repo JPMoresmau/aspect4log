@@ -60,13 +60,13 @@ public class LogAspect {
 	}
 
 	/*
-	 * it is marked static, because if there is more than one instance of LogApsect we must have one ident system per thread
+	 * it is marked static, because if there is more than one instance of LogAspect we must have one ident system per thread
 	 */
-	private static final ThreadLocal<Integer> thraedLocalIndent = new ThreadLocal<Integer>();
+	private static final ThreadLocal<Integer> threadLocalIndent = new ThreadLocal<>();
 
 	// @Around("execution(!@Log *(@Log *).*(..)) && @target(log)")
 	@Around("(execution(!@net.sf.aspect4log.Log *(@net.sf.aspect4log.Log *).*(..))|| execution(!@net.sf.aspect4log.Log *.new(..)))  && @within(log)")
-	public Object logNotAnnotatedMethondsInAnnotatedClasses(ProceedingJoinPoint pjp, Log log) throws Throwable {
+	public Object logNotAnnotatedMethodsInAnnotatedClasses(ProceedingJoinPoint pjp, Log log) throws Throwable {
 		return log(pjp, log);
 	}
 
@@ -76,8 +76,8 @@ public class LogAspect {
 		return log(pjp, log);
 	}
 
-	public static final Integer getThreadLocalIdent() {
-		return thraedLocalIndent.get() == null ? Integer.valueOf(0) : thraedLocalIndent.get();
+	public static Integer getThreadLocalIdent() {
+		return threadLocalIndent.get() == null ? Integer.valueOf(0) : threadLocalIndent.get();
 	}
 
 	private Object log(ProceedingJoinPoint pjp, Log log) throws Throwable {
@@ -145,20 +145,20 @@ public class LogAspect {
 
 	private void increaseIndent(Log log) {
 		if (log.indent()) {
-			if (thraedLocalIndent.get() == null) {
-				thraedLocalIndent.set(Integer.valueOf(0));
-			} else if (thraedLocalIndent.get() != null) {
-				thraedLocalIndent.set(Integer.valueOf(thraedLocalIndent.get() + 1));
+			if (threadLocalIndent.get() == null) {
+				threadLocalIndent.set(0);
+			} else if (threadLocalIndent.get() != null) {
+				threadLocalIndent.set(threadLocalIndent.get() + 1);
 			}
 		}
 	}
 
 	private void decreaseIndent(Log log) {
 		if (log.indent()) {
-			if (thraedLocalIndent.get().equals(Integer.valueOf(0))) {
-				thraedLocalIndent.remove();
+			if (threadLocalIndent.get().equals(0)) {
+				threadLocalIndent.remove();
 			} else {
-				thraedLocalIndent.set(Integer.valueOf(thraedLocalIndent.get() - 1));
+				threadLocalIndent.set(threadLocalIndent.get() - 1);
 			}
 		}
 	}

@@ -54,13 +54,13 @@ public class TestFooService {
 	public void testOneIsFoo() {
 		Assert.assertTrue(fooService.isAtLeastOneFoo("boo", "foo",new Object()));
 		
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		list.add("l1");
 		list.add("l2");
 		
-		Map<Object,Object> map = new HashMap<Object,Object>();
+		Map<Object,Object> map = new HashMap<>();
 		map.put("key1", "value1");
-		map.put(new Integer(1), new Thread());
+		map.put(1, new Object());
 		Assert.assertFalse(fooService.isAtLeastOneFoo(new ToStringBreaker(),"boo", new Object(),list,map));
 	}
 

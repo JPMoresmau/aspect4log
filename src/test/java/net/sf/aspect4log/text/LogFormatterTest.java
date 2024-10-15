@@ -3,19 +3,19 @@ package net.sf.aspect4log.text;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class LogFormmatterTest {
+public class LogFormatterTest {
 
 	@Test
 	public void isToStringOverriden() {
-		Assert.assertFalse(new LogFormatter().isToStringOverriden(new Object().getClass()));
-		Assert.assertFalse(new LogFormatter().isToStringOverriden(new Object[] { 1 }.getClass()));
-		Assert.assertTrue(new LogFormatter().isToStringOverriden(new String("s").getClass()));
-		Assert.assertTrue(new LogFormatter().isToStringOverriden(new Integer(1).getClass()));
+		Assert.assertFalse(new LogFormatter().isToStringOverriden(Object.class));
+		Assert.assertFalse(new LogFormatter().isToStringOverriden(Object[].class));
+		Assert.assertTrue(new LogFormatter().isToStringOverriden(String.class));
+		Assert.assertTrue(new LogFormatter().isToStringOverriden(Integer.class));
 	}
 	
 	@Test
 	public void testSubstitute(){
-		Integer i = 5;
+		int i = 5;
 		String s = "s";
 		int[] ii = { 1, 2 };
 		Object[] args = { i, s, ii };

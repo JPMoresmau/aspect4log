@@ -20,13 +20,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAnyElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 import net.sf.aspect4log.text.CustomisableMessageBuilderFactory;
 import net.sf.aspect4log.text.MessageBuilderFactory;
@@ -57,28 +57,29 @@ public class LogFormatConfiguration {
 	}
 
 	@XmlElement
-	public void setMessageBuilderFactoryConfiguration(MessageBuilderFactoryConfiguration messageBuilderFactoryConfiguration) throws InstantiationException, IllegalAccessException, InvocationTargetException, DOMException {
-		messageBuilderFactory = messageBuilderFactoryConfiguration.getClazz().newInstance();
+	public void setMessageBuilderFactoryConfiguration(MessageBuilderFactoryConfiguration messageBuilderFactoryConfiguration) throws InstantiationException, IllegalAccessException, InvocationTargetException, DOMException, NoSuchMethodException {
+		messageBuilderFactory = messageBuilderFactoryConfiguration.getClazz().getConstructor().newInstance();
 		for (Element element : messageBuilderFactoryConfiguration.getProperties()) {
 			BeanUtils.setProperty(messageBuilderFactory, element.getTagName(), element.getTextContent());
 		}
 	}
+
+	@XmlAccessorType(XmlAccessType.FIELD)
+	public static class MessageBuilderFactoryConfiguration {
+		@XmlAnyElement
+		private final List<Element> properties = new ArrayList<Element>();
+
+		@XmlAttribute(name = "class")
+		private Class<? extends MessageBuilderFactory> clazz;
+
+		protected List<Element> getProperties() {
+			return properties;
+		}
+
+		protected Class<? extends MessageBuilderFactory> getClazz() {
+			return clazz;
+		}
+
+	}
 }
 
-@XmlAccessorType(XmlAccessType.FIELD)
-class MessageBuilderFactoryConfiguration {
-	@XmlAnyElement
-	private final List<Element> properties = new ArrayList<Element>();
-
-	@XmlAttribute(name = "class")
-	private Class<? extends MessageBuilderFactory> clazz;
-
-	protected List<Element> getProperties() {
-		return properties;
-	}
-
-	protected Class<? extends MessageBuilderFactory> getClazz() {
-		return clazz;
-	}
-
-}
