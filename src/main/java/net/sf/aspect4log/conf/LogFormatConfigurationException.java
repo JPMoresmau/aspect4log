@@ -16,7 +16,6 @@
  */
 package net.sf.aspect4log.conf;
 
-import java.io.Serial;
 
 /**
  * This exception is thrown in case  aspect4log.xml or aspect4log-test.xml contains errors.  
@@ -26,7 +25,6 @@ import java.io.Serial;
  */
 public class LogFormatConfigurationException extends RuntimeException {
 
-	@Serial
 	private static final long serialVersionUID = -3397749350256923573L;
 
 	public LogFormatConfigurationException() {
